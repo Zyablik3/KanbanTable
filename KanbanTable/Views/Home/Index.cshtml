@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Канбан-доска</title>
+    <style>
+        .kanban-board {
+            display: flex;
+            justify-content: space-between;
+        }
+        .kanban-column {
+            width: 30%;
+            background-color: #f4f4f4;
+            margin: 10px;
+            padding: 10px;
+        }
+        .kanban-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="kanban-board">
+        <div class="kanban-column">
+            <h2>Сделать</h2>
+            <!-- Задачи для колонки "Сделать" -->
+            <div class="kanban-item">Задача 1</div>
+            <div class="kanban-item">Задача 2</div>
+        </div>
+        <div class="kanban-column">
+            <h2>В процессе</h2>
+            <!-- Задачи для колонки "В процессе" -->
+            <div class="kanban-item">Задача 3</div>
+        </div>
+        <div class="kanban-column">
+            <h2>Сделано</h2>
+            <!-- Задачи для колонки "Сделано" -->
+            <div class="kanban-item">Задача 4</div>
+        </div>
+    </div>
+</body>
+</html>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

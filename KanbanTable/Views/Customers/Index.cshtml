@@ -1,0 +1,39 @@
+﻿@model IEnumerable<KanbanTable.Entities.Customer>
+
+
+
+<h2>Список заказчиков</h2>
+
+<p>
+    <a asp-action="Create">Добавить заказчика</a>
+</p>
+<table class="table">
+	<tr><th>ID</th><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>ИНН</th><th>Контактный телефон</th></tr>
+   
+    @foreach (var customer in Model)
+    {
+		<tr>
+			<td>@customer.Id</td>
+			<td>@customer.Name</td>
+			<td>@customer.Surname</td>
+			<td>@customer.MiddleName</td>
+			<td>@customer.INN</td>
+			<td>@customer.PhoneNumber</td>
+			<td>
+				<form asp-action="Edit" asp-controller="Customers" method="get" asp-route-id="@customer.Id">
+					<input type="submit" value="Изменить" />
+				</form>
+			</td>
+			<td>
+				<form asp-controller="Customers" asp-action="Delete" method="post" asp-route-id="@customer.Id">
+					<input type="submit" value="Удалить" />
+				</form>
+			</td>
+		</tr>
+	}
+</table>
+<form method="post" asp-controller="Customers" asp-action="Back">
+	<p>
+		<input type="submit" value="Вернуться на главную" />
+	</p>
+</form>

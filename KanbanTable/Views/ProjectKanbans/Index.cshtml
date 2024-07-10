@@ -1,0 +1,38 @@
+﻿@model IEnumerable<KanbanTable.Entities.ProjectKanban>
+
+
+
+<h2>Список проектров</h2>
+
+<p>
+	<a asp-action="Create">Добавить проект</a>
+</p>
+<table class="table">
+	<tr><th>ID</th><th>Имя</th><th>Стоимость</th></tr>
+
+	@foreach (var project in Model)
+	{
+		<tr>
+			<td>@project.Id</td>
+			<td>@project.Name</td>
+			<td>@project.Cost</td>
+		
+			<td>
+				<form asp-action="Edit" asp-controller="ProjectKanbans" method="get" asp-route-id="@project.Id">
+					<input type="submit" value="Изменить" />
+				</form>
+			</td>
+			<td>
+				<form asp-controller="ProjectKanbans" asp-action="Delete" method="post" asp-route-id="@project.Id">
+					<input type="submit" value="Удалить" />
+				</form>
+			</td>
+		</tr>
+	}
+</table>
+<form method="post" asp-controller="ProjectKanbans" asp-action="Back">
+	<p>
+		<input type="submit" value="Вернуться на главную" />
+	</p>
+</form>
+
