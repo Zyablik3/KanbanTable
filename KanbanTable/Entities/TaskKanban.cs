@@ -6,6 +6,8 @@
         public string Name { get; set; }
         public string? Description { get; set; }
         public ProjectKanban? Project { get; set; }
+      
+
         public StatusTask? Status { get; set; }
 
         

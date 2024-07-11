@@ -10,10 +10,10 @@ using KanbanTable;
 
 namespace Entities.Controllers
 {
-	public class TaskKanbanController : Controller
+	public class TaskKanbansController : Controller
 	{
 		Context db;
-		public TaskKanbanController(Context context)
+		public TaskKanbansController(Context context)
 		{
 			db = context;
 		}
@@ -23,7 +23,10 @@ namespace Entities.Controllers
 		}
 		public IActionResult Create()
 		{
-			return View();
+            ViewBag.proect = new List<ProjectKanban>(db.ProjectKanbans.ToList());
+            ViewBag.stat = new List<StatusTask>(db.TaskStatuses.ToList()); //выпадающий список
+
+            return View();
 		}
 		[HttpPost]
 		public async Task<IActionResult> Create(TaskKanban task)

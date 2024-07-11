@@ -28,7 +28,24 @@
         </form>
     </div>
 </div>
-
+<div>
+    <label asp-for="Project"> Проект</label><br />
+    <select asp-for="Project">
+        @foreach (var proect in ViewBag.proect)
+        {
+            <option value="proect.Project">@proect.Name</option> //выпадающий список
+        }
+    </select>
+</div>
+<div>
+    <label asp-for="Status"> Статус</label><br />
+    <select asp-for="Status">
+        @foreach (var stat in ViewBag.stat)
+        {
+            <option value="stat.Project">@stat.Name</option>//выыпадающий список
+        }
+    </select>
+</div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

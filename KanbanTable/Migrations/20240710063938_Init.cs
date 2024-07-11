@@ -5,8 +5,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace KanbanTable.Migrations
 {
+    /// <inheritdoc />
     public partial class Init : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -40,10 +42,10 @@ namespace KanbanTable.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "KanbanProjects",
+                name: "ProjectKanbans",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Cost = table.Column<int>(type: "integer", nullable: false),
@@ -51,65 +53,64 @@ namespace KanbanTable.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KanbanProjects", x => x.ID);
+                    table.PrimaryKey("PK_ProjectKanbans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_KanbanProjects_Customers_CustomerId",
+                        name: "FK_ProjectKanbans_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "KanbanTasks",
+                name: "TaskKanbans",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    ProjectID = table.Column<int>(type: "integer", nullable: false),
-                    StatusId = table.Column<int>(type: "integer", nullable: false)
+                    ProjectId = table.Column<int>(type: "integer", nullable: true),
+                    StatusId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KanbanTasks", x => x.Id);
+                    table.PrimaryKey("PK_TaskKanbans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_KanbanTasks_KanbanProjects_ProjectID",
-                        column: x => x.ProjectID,
-                        principalTable: "KanbanProjects",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_TaskKanbans_ProjectKanbans_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "ProjectKanbans",
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_KanbanTasks_TaskStatuses_StatusId",
+                        name: "FK_TaskKanbans_TaskStatuses_StatusId",
                         column: x => x.StatusId,
                         principalTable: "TaskStatuses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_KanbanProjects_CustomerId",
-                table: "KanbanProjects",
+                name: "IX_ProjectKanbans_CustomerId",
+                table: "ProjectKanbans",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_KanbanTasks_ProjectID",
-                table: "KanbanTasks",
-                column: "ProjectID");
+                name: "IX_TaskKanbans_ProjectId",
+                table: "TaskKanbans",
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_KanbanTasks_StatusId",
-                table: "KanbanTasks",
+                name: "IX_TaskKanbans_StatusId",
+                table: "TaskKanbans",
                 column: "StatusId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "KanbanTasks");
+                name: "TaskKanbans");
 
             migrationBuilder.DropTable(
-                name: "KanbanProjects");
+                name: "ProjectKanbans");
 
             migrationBuilder.DropTable(
                 name: "TaskStatuses");

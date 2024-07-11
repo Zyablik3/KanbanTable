@@ -10,10 +10,10 @@ using KanbanTable;
 
 namespace Entities.Controllers
 {
-	public class ProjectKanbanController : Controller
+	public class ProjectKanbansController : Controller
 	{
 		Context db;
-		public ProjectKanbanController(Context context)
+		public ProjectKanbansController(Context context)
 		{
 			db = context;
 		}
@@ -23,6 +23,7 @@ namespace Entities.Controllers
 		}
 		public IActionResult Create()
 		{
+			
 			return View();
 		}
 		[HttpPost]

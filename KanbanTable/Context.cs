@@ -20,9 +20,9 @@ namespace KanbanTable
 
 
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<TaskKanban> TaskKanbans { get; set; }
-        public DbSet<ProjectKanban> ProjectKanbans { get; set; }
-        public DbSet<StatusTask> TaskStatuses { get; set; }
+        public DbSet<Customer> Customers { get; set; } = null!;
+        public DbSet<TaskKanban> TaskKanbans { get; set; } = null!;
+        public DbSet<ProjectKanban> ProjectKanbans { get; set; } = null!;
+        public DbSet<StatusTask> TaskStatuses { get; set; } = null;
     }
 }

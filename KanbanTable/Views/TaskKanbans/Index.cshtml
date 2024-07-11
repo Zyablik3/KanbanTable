@@ -1,41 +1,33 @@
 ﻿@model IEnumerable<KanbanTable.Entities.TaskKanban>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h2>Список заданий</h2>
+<p><a asp-action="Create">Добавить задание</a> </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+	<tr><th>ID</th><th>Название</th><th>Описание</th><th>Проект</th><th>Статус</th></tr>
+	@foreach (var task in Model)
+	{
+		<tr>
+			<td>@task.Id</td>
+			<td>@task.Name</td>
+			<td>@task.Description</td>
+			<td>@task.Project</td>
+			<td>@task.Status</td>
+		
+
+			<td>
+				<form asp-action="Edit" asp-controller="TaskKanbans" method="get" asp-route-id="@task.Id">
+					<input type="submit" value="Изменить" />
+				</form>
+			</td>
+			<td>
+				<form asp-controller="TaskKanbans" asp-action="Delete" method="post" asp-route-id="@task.Id">
+					<input type="submit" value="Удалить" />
+				</form>
+			</td>
+		</tr>
+	}
 </table>
+<form method="post" asp-controller="TaskKanbans" asp-action="Back">
+	<p>
+		<input type="submit" value="Вернуться на главную" />
+	</p>
+</form>
